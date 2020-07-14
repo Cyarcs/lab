@@ -1,5 +1,8 @@
-import PyQt5
 from PyQt5 import QtWidgets
+import PyQt5
+import numpy
+import datetime
+import time
 from equip import Ui_MainWindow  # импорт нашего сгенерированного файла
 from ls_equip import Ui_ls_equip
 from zaivka import Ui_zaivka
@@ -39,59 +42,82 @@ class zaivka(QtWidgets.QMainWindow):
         self.ui.listWidget_4.itemDoubleClicked.connect(self.dell_add_team)
         self.ui.listWidget_5.itemDoubleClicked.connect(self.dell_add_task)
         self.ui.add_zaivka.clicked.connect(self.add_zaivka)
+        self.ui.a= datetime.date.today()
+        print(self.ui.a)
+        self.data=self.ui.a
+        print(self.ui.a.year)
+        print(self.ui.a.month)
+        print(self.ui.a.day)
+        # self.ui.tableWidget.setItem(0, 0, PyQt5.QtWidgets.QTableWidgetItem(str(item.text())))
         # self.list = [self.ui.lineEdit.text(), self.ui.lineEdit_2.text(), self.ui.lineEdit_4.text(), self.ui.lineEdit_5.text()]
         # self.clear = [self.ui.lineEdit.clear(), self.ui.lineEdit.clear(), self.ui.lineEdit.clear(), self.ui.lineEdit.clear()]
 
     def add_zaivka(self):
+        name=self.ui.lineEdit_3.text()
         projeck = self.ui.listWidget.count()
         workplace = self.ui.listWidget_2.count()
         equip = self.ui.listWidget_3.count()
         team = self.ui.listWidget_4.count()
         task = self.ui.listWidget_5.count()
-        print(projeck)
-        print(workplace)
-        print(equip)
-        print(team)
-        print(task)
-        if projeck!=0 and workplace!=0 and equip!=0 and team!=0 and task!=0:
+        if projeck != 0 and workplace != 0 and equip != 0 and team != 0 and task != 0:
+        # if projeck!=0:
             items_all=[]
+            items_from = []
             items_projeck = []
             items_workplace = []
             items_equip = []
             items_team = []
             items_task = []
+            items_time = []
+            items_time.append(self.ui.a.year-self.ui.a.month-self.ui.a.day)
+            items_from.append(self.ui.lineEdit_3.text())
+            # print(items_from)
+            # print('9999')
+            self.ui.lineEdit_3.clear()
+            items_all.append(items_from)
             for i in range(projeck):
-                item = self.ui.listWidget.item(i)
-                items_projeck.append(item.text())
-
+                item_projeck = self.ui.listWidget.item(i)
+                items_projeck.append(item_projeck.text())
+                self.ui.tableWidget.setWordWrap(True)
             items_all.append(items_projeck)
             for i in range(workplace):
-                item = self.ui.listWidget.item(i)
-                items_workplace.append(item.text())
+                item_workplace = self.ui.listWidget_2.item(i)
+                items_workplace.append(item_workplace.text())
+
             items_all.append(items_workplace)
             for i in range(equip):
-                item = self.ui.listWidget.item(i)
-                items_equip.append(item.text())
+                item_equip = self.ui.listWidget_3.item(i)
+                items_equip.append(item_equip.text())
             items_all.append(items_equip)
             for i in range(team):
-                item = self.ui.listWidget.item(i)
-                items_team.append(item.text())
+                item_team = self.ui.listWidget_4.item(i)
+                items_team.append(item_team.text())
             items_all.append(items_team)
             for i in range(task):
-                item = self.ui.listWidget.item(i)
-                items_task.append(item.text())
+                item_task = self.ui.listWidget_5.item(i)
+                items_task.append(item_task.text())
             items_all.append(items_task)
-
+            items_all.append(items_time)
             self.ui.listWidget.clear()
             self.ui.listWidget_2.clear()
             self.ui.listWidget_3.clear()
             self.ui.listWidget_4.clear()
             self.ui.listWidget_5.clear()
+            print('***')
+            print(items_all)
+            print('***')
+            items_all_r=[]
+            with open('list_widget.json', mode='r', encoding='utf-8') as fh:
+                import json
+                items_all_r = json.load(fh)
+            print(items_all_r)
+            items_all_r.append(items_all)
             with open('list_widget.json', mode='w', encoding='utf-8') as f:
                 import json
-                json.dump(items_all, f, indent=4, ensure_ascii=False)
+                json.dump(items_all_r, f, indent=4, ensure_ascii=False)
         else:
             print('none')
+            print('none21111111111')
     def add_projeck(self):
         self.ui.listWidget.addItem(str(self.ui.lineEdit.text()))
         self.ui.lineEdit.clear()
@@ -110,6 +136,7 @@ class zaivka(QtWidgets.QMainWindow):
 
     def dell_add_projeck(self):
         self.ui.listWidget.takeItem(self.ui.listWidget.currentRow())
+
 
     def dell_add_workplace(self):
         self.ui.listWidget_2.takeItem(self.ui.listWidget_2.currentRow())

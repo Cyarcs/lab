@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1173</width>
+    <width>1153</width>
     <height>705</height>
    </rect>
   </property>
@@ -332,7 +332,7 @@
             <number>1</number>
            </property>
            <property name="columnCount">
-            <number>5</number>
+            <number>7</number>
            </property>
            <attribute name="horizontalHeaderVisible">
             <bool>true</bool>
@@ -353,6 +353,20 @@
             <bool>false</bool>
            </attribute>
            <row/>
+           <column>
+            <property name="text">
+             <string>From</string>
+            </property>
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="textAlignment">
+             <set>AlignCenter</set>
+            </property>
+           </column>
            <column>
             <property name="text">
              <string>Project</string>
@@ -426,6 +440,25 @@
              <set>AlignCenter</set>
             </property>
            </column>
+           <column>
+            <property name="text">
+             <string>Time</string>
+            </property>
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="textAlignment">
+             <set>AlignCenter</set>
+            </property>
+           </column>
+           <item row="0" column="2">
+            <property name="text">
+             <string/>
+            </property>
+           </item>
           </widget>
          </item>
         </layout>
@@ -440,7 +473,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1173</width>
+     <width>1153</width>
      <height>21</height>
     </rect>
    </property>
